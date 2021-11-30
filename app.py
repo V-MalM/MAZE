@@ -106,8 +106,16 @@ for index,row in us_museum_df.iterrows():
 us_list = json_state_string
  
 
-us_all_museum_query = "select museum_name, latitude, longitude, state_fips,county_fips from maze_data "\
+# us_all_museum_query = "select museum_name, latitude, longitude, "\
+#     " state_fips,county_fips from maze_data "\
+# " where latitude != 0 order by county_fips"
+
+
+us_all_museum_query = "select museum_name, museum_type_id, museum_type, latitude, longitude,"\
+ "street_add_phyloc, city_phyloc, zip_phyloc, phone_number,"\
+ "county_fips,state_fips,sabbr,sname from maze_data "\
 " where latitude != 0 order by county_fips"
+
 us_all_museum_df = pd.read_sql(us_all_museum_query, connection)
 
 us_all_result = us_all_museum_df.to_json(orient="records")
